@@ -1,4 +1,44 @@
-training-wheel.js
-=================
-
+==training-wheel.js
+-------------------
 simple examples with wheel for the uninitiated
+
+=== steps i took to do hello world with wheel version 0.2.0
+==== 
+
+{{{
+mkdir -p wheelplay/examples
+cd wheelplay/examples
+curl -O https://raw.github.com/RAM9/wheel.js/0.2.0/package/wheel-standalone-0.2.0.js
+}}}
+create the bare minimum wheel view
+hello-world.html (examples/hello-world.html)
+{{{
+<html>
+  <body>
+    <section id="main">
+    </section>
+
+    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+
+    <script class='template' type="text/html" name='HelloWorld'>
+      <div> 
+      </div>
+    </script>
+
+    <script type="text/javascript">
+      window.app = {
+        templates: Wheel.Templates.build()
+      }
+      window.app.templates.gather();
+      Wheel.View.subclass('HelloWorld', {
+        // constructor
+        init:function() {
+          // $ jquery object
+          this.$.html("Hello World!");
+          }});
+        HelloWorld.build({parent:$('#main')});
+     </script>
+  </body>
+</html>
+
+}}}
