@@ -1,0 +1,24 @@
+  <body>
+    <section id="main">
+    </section>
+
+    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+    <script class='template' type="text/html" name='HelloWorld'>
+      <div> 
+      </div>
+    </script>
+    <script type="text/javascript">
+      window.app = {
+        templates: Wheel.Templates.build()
+      }
+      window.app.templates.gather();
+      Wheel.View.subclass('HelloWorld', {
+        // constructor
+        init:function() {
+          // $ jquery object
+          this.$.html("Hello World!");
+          }});
+        HelloWorld.build({parent:$('#main')});
+     </script>
+
+  </body></html>
