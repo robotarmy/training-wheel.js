@@ -2,8 +2,17 @@
 -------------------
 simple examples with wheel for the uninitiated
 
-=== steps i took to do hello world with wheel version 0.2.0
-==== 
+== Getting your own copy
+
+wheel-standalone-0.2.0 is packaged with jquery 
+
+{{{
+curl -O https://raw.github.com/RAM9/wheel.js/0.2.0/package/wheel-standalone-0.2.0.js
+}}}
+
+
+== Copy and Paste Guide to HelloWorld
+===
 
 {{{
 mkdir -p wheelplay/examples
