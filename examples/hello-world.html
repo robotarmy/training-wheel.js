@@ -1,12 +1,15 @@
+<html>
   <body>
     <section id="main">
     </section>
 
     <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+
     <script class='template' type="text/html" name='HelloWorld'>
       <div> 
       </div>
     </script>
+
     <script type="text/javascript">
       window.app = {
         templates: Wheel.Templates.build()
@@ -20,5 +23,6 @@
           }});
         HelloWorld.build({parent:$('#main')});
      </script>
+  </body>
+</html>
 
-  </body></html>
