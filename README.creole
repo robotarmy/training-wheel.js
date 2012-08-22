@@ -5,14 +5,14 @@ simple examples with wheel for the uninitiated
 === steps i took to do hello world with wheel version 0.2.0
 ==== 
 
-{{
+{{{
 mkdir -p wheelplay/examples
 cd wheelplay/examples
 curl -O https://raw.github.com/RAM9/wheel.js/0.2.0/package/wheel-standalone-0.2.0.js
-}}
+}}}
 create the bare minimum wheel view
 hello-world.html (examples/hello-world.html)
-{{
+{{{
 <html>
   <body>
     <section id="main">
@@ -41,4 +41,4 @@ hello-world.html (examples/hello-world.html)
   </body>
 </html>
 
-}}
+}}}
