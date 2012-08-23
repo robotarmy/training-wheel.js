@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Tap Patch </title>
+    <style>
+      body {
+        background-color:#A0A0A0;
+        position:relative;
+      }
+      .tap-patch {
+        width            : 149px;
+        height           : 149px;
+        margin-left      : 10px;
+        margin-right     : 10px;
+        margin-top       : 10px;
+        margin-bottom    : 10px;
+        background-color : #C9C990;
+        border-color     : #007700;
+        border-width     : 1px;
+        border-style     : solid;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="main">
+    </section>
+
+    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+
+    <script class='template' type="text/html" name='TapPatch'>
+      <div class="tap-patch">
+      </div>
+    </script>
+
+    <script type="text/javascript">
+      window.app = {
+        templates: Wheel.Templates.build(),
+        eventManager: (Modernizr.touch ? Wheel.TouchManager : Wheel.MouseManager).build()
+      }
+      window.app.templates.gather();
+      Wheel.View.subclass('TapPatch', {
+        listen: function() {
+          this.$.on('tap', this.tapChangesColor.bind(this));
+        },
+        tapChangesColor: function() {
+          var red = Math.floor(Math.random()*0xff);
+          var green = Math.floor(Math.random()*0xff);
+          var blue = Math.floor(Math.random()*0xff);
+          var alpha = Math.random();
+          var rgbaColor = "rgba(" +red+ "," + green + "," +blue+ "," +alpha+ ")"
+          this.$.css('background-color', rgbaColor);
+        }
+      });
+        TapPatch.build({parent:$('#main')});
+     </script>
+  </body>
+</html>
+
