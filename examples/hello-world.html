@@ -11,17 +11,21 @@
     </script>
 
     <script type="text/javascript">
-      window.app = {
-        templates: Wheel.Templates.build()
-      }
-      window.app.templates.gather();
+      Wheel.App.subclass('HelloWorldApp', {
+        init: function() {
+          HelloWorld.build({parent:$('#main')});
+        }
+      });
+      
       Wheel.View.subclass('HelloWorld', {
         // constructor
         init:function() {
           // $ jquery object
           this.$.html("Hello World!");
-          }});
-        HelloWorld.build({parent:$('#main')});
+        }
+      });
+      
+      HelloWorld.build();
      </script>
   </body>
 </html>
