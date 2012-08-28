@@ -1,31 +1,74 @@
 <html>
+  <head>
+    <title> Drag Patch </title>
+    <style>
+      body {
+        background-color:#A0A0A0;
+        position:relative;
+      }
+      .drag-patch {
+        position         : absolute;
+        top              : 0;
+        left             : 0;
+        width            : 149px;
+        height           : 149px;
+        background-color : #8833A0;
+        border-color     : #007700;
+        border-width     : 1px;
+        border-style     : solid;
+      }
+    </style>
+  </head>
+
   <body>
     <section id="main">
     </section>
 
-    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
-    <script class='template' type="text/html" name='HelloWorld'>
-      <div> 
+    <script class='template' type="text/html" name='App.Drag.Patch'>
+      <div class='drag-patch'> 
       </div>
     </script>
 
     <script type="text/javascript">
-      Wheel.App.subclass('MyHelloWorldApp', {
+      Wheel.App.subclass('App', {
         init: function() {
-          HelloWorld.build({parent:$('#main')});
+          App.Drag.Patch.build({parent:$('#main')});
         }
       });
       
-      Wheel.View.subclass('HelloWorld', {
-        // constructor
-        init:function() {
-          // $ jquery object
-          this.$.html("Hello World!");
+      Wheel.View.subclass('App.Drag.Patch', {
+        listen:function() {
+          this.$.on('touchstart mousedown', this.triggerDragInit.bind(this));
+          this.$.on('dragmove',   this.onDragPatch.bind(this));
+          this.$.on('dragend',   this.onDragPatchFinished.bind(this));
+        },
+        triggerDragInit: function(e) {
+          console.log("draginit");
+          this.starting_mouse_x = e.pageX;
+          this.starting_mouse_y = e.pageX;
+          this.$.trigger('draginit'); // enable all succesize events to fire dragmove
+        },
+          onDragPatch: function(e) {
+          console.log("--- starting mouse --- [ x  followed by y ]");
+          console.log(this.starting_mouse_y);
+          console.log(this.starting_mouse_x);
+          var posx = e.pageX;
+          var posy = e.pageY;
+          console.log("--- page  --- [ x  followed by y ]");
+          console.log(posy);
+          console.log(posx);
+          console.log("-------");
+          this.$.css('left',posx);
+          this.$.css('top',posy);
+        },
+        onDragPatchFinished: function(e) {
+          console.log('drag end is called automatically on mouseup or touchend');
         }
       });
       
-      MyHelloWorldApp.build();
+      App.build();
 
      </script>
   </body>

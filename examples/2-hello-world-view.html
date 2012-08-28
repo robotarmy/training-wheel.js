@@ -3,7 +3,7 @@
     <section id="main">
     </section>
 
-    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
     <script class='template' type="text/html" name='HelloWorld'>
       <div> 
@@ -11,7 +11,7 @@
     </script>
 
     <script type="text/javascript">
-      Wheel.App.subclass('MyHelloWorldApp', {
+      Wheel.App.subclass('App', {
         init: function() {
           HelloWorld.build({parent:$('#main')});
         }
@@ -25,7 +25,7 @@
         }
       });
       
-      MyHelloWorldApp.build();
+      App.build();
 
      </script>
   </body>
