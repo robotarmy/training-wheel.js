@@ -25,20 +25,21 @@
     <section id="main">
     </section>
 
-    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
-    <script class='template' type="text/html" name='TapPatch'>
+    <script class='template' type="text/html" name='App.Patch.Tap'>
       <div class="tap-patch">
       </div>
     </script>
 
     <script type="text/javascript">
-      window.app = {
-        templates: Wheel.Templates.build(),
-        eventManager: (Modernizr.touch ? Wheel.TouchManager : Wheel.MouseManager).build()
-      }
-      window.app.templates.gather();
-      Wheel.View.subclass('TapPatch', {
+      Wheel.App.subclass('App', {
+        init: function() {
+          App.Patch.Tap.build({parent:$('#main')});
+        }
+      });
+      
+      Wheel.View.subclass('App.Patch.Tap', {
         listen: function() {
           this.$.on('tap', this.tapChangesColor.bind(this));
         },
@@ -51,7 +52,8 @@
           this.$.css('background-color', rgbaColor);
         }
       });
-        TapPatch.build({parent:$('#main')});
+
+      App.build();
      </script>
   </body>
 </html>
