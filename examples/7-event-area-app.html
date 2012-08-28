@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Event Generating </title>
+    <style>
+      body {
+        background-color:#A0A0A0;
+        position:relative;
+        width:320px;
+      }
+      .event-area {
+        width            : 100%;
+        height           : 150px;
+        padding-left      : 10px;
+        padding-right     : 10px;
+        padding-top       : 10px;
+        padding-bottom    : 10px;
+        background-color : #C9C990;
+        border-color     : #007700;
+        border-width     : 1px;
+        border-style     : solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    </div>
+
+    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
+
+    <script class='template' type="text/html" name='App.EventArea'>
+      <div class="event-area">
+      </div>
+      <div class='event-display'>
+      </div>
+    </script>
+
+    <script type="text/javascript">
+      Wheel.App.subclass('App', {
+        init: function() {
+          App.EventArea.build({parent:$('#main')});
+        }
+      });
+      Wheel.View.subclass('App.EventArea', {
+        init: function() {
+        },
+        listen: function() {
+          var events = [
+          'tapstart',
+          'taphold',
+          'tap',
+          'tapmove',
+          'tapend',
+          'doubletap',
+          'swipe',
+          'swipeleft',
+          'swiperight',
+          'swipeup',
+          'swipedown',
+          'pinch',
+          'zoom',
+          'tapend'
+          ];
+          for(var i = events.length-1; i >= 0; i--) {
+            this.$.on(events[i],this.eventFired.bind(this));
+          }
+        },
+        eventFired: function(event) {
+         var dom_string = "<div class=\'event "+event.type+"\'>"+event.type+" has fired</div>";
+         this.$.filter('.event-display').append(dom_string);
+        }
+      });
+      App.build();
+     </script>
+  </body>
+</html>
+

@@ -7,7 +7,7 @@
         background-color:#A0A0A0;
         position:relative;
       }
-      .tap-patch {
+      .swipe-patch {
         width            : 149px;
         height           : 149px;
         margin-left      : 10px;
@@ -22,23 +22,23 @@
     </style>
   </head>
   <body>
-    <section id="main">
-    </section>
+    <div id="main">
+    </div>
 
-    <script type="text/javascript" src="wheel-standalone-0.2.0.js"></script> 
+    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
-    <script class='template' type="text/html" name='TapPatch'>
-      <div class="tap-patch">
+    <script class='template' type="text/html" name='App.Patch.Swipe'>
+      <div class="swipe-patch">
       </div>
     </script>
 
     <script type="text/javascript">
-      window.app = {
-        templates: Wheel.Templates.build(),
-        eventManager: (Modernizr.touch ? Wheel.TouchManager : Wheel.MouseManager).build()
-      }
-      window.app.templates.gather();
-      Wheel.View.subclass('TapPatch', {
+      Wheel.App.subclass('App', {
+        init: function() {
+          App.Patch.Swipe.build({parent:$('#main')});
+        }
+      });
+      Wheel.View.subclass('App.Patch.Swipe', {
         listen: function() {
           this.$.on('swipe', this.swipeChangesColor.bind(this));
         },
@@ -51,7 +51,7 @@
           this.$.css('background-color', rgbaColor);
         }
       });
-        TapPatch.build({parent:$('#main')});
+      App.build();
      </script>
   </body>
 </html>
