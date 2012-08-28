@@ -1,7 +1,9 @@
 tex: *.tex
 	xelatex -halt-on-error $<
 
-all: tex
+figure: figures/diag.mp
+	cd figures && mptopdf diag.mp
+all: tex figure
 
 clean:
 	rm -rf *.pdf *.log

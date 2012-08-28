@@ -43,47 +43,38 @@
       
       Wheel.View.subclass('App.Drag.Patch', {
         init  :function() {
-          this.topPatch  = 0;
-          this.leftPatch = 0;
-          this.$.css('left',this.leftPatch);
-          this.$.css('top',this.topPatch);
+          this.currentBoxCornerTop  = 0;
+          this.currentBoxCornerLeft = 0;
+          this.$.css('left',this.currentBoxCornerLeft);
+          this.$.css('top',this.currentBoxCornerTop);
         },
         listen:function() {
           this.$.on('touchstart mousedown', this.triggerDragInit.bind(this));
-          this.$.on('dragmove',   this.onDragPatch.bind(this));
+          this.$.on('dragmove',  this.onDragPatch.bind(this));
           this.$.on('dragend',   this.onDragPatchFinished.bind(this));
         },
         triggerDragInit: function(e) {
-          this.tOx = e.pageX;
-          this.tOy = e.pageY;
+          this.touchOriginX = e.pageX;
+          this.touchOriginY = e.pageY;
           this.$.trigger('draginit'); // enable all succesize events to fire dragmove
         },
-          onDragPatch: function(e) {
-          var dTx  = e.pageX;
-          var dTy  = e.pageY;
-          
-          var hT   = dTx - this.tOx;
-          var vT   = dTy - this.tOy;
-        
-          var bOx  = this.leftPatch; 
-          var bOy  = this.topPatch;
-/*
-          console.log(dTx+" dTx should be " + (this.tOx+hT));
-          console.log(dTy+" dTy should be " + (this.tOy+vT));
-          console.log(" bDx should be " + ((bOx - this.tOx)+hT));
-          console.log(" bDy should be " + ((bOy - this.tOy)+vT));
-*/
-          this.leftMovePatch = bOx + hT;
-          this.topMovePatch  = bOy + vT;
-          this.$.css('left', this.leftMovePatch);
-          this.$.css('top' , this.topMovePatch);
-         
-          
+        onDragPatch: function(e) {
+          this.assignNextBoxTravel(e.pageX,e.pageY);
         },
         onDragPatchFinished: function(e) {
           console.log('drag end is called automatically on mouseup or touchend');
-          this.leftPatch = this.leftMovePatch;
-          this.topPatch = this.topMovePatch;
+          this.currentBoxCornerLeft = this.nextBoxCornerLeft;
+          this.currentBoxCornerTop = this.nextBoxCornerTop;
+        },
+        assignNextBoxTravel:function(nextTouchDownX,nextTouchDownY) {
+          var horizontalTravelPx = nextTouchDownX - this.touchOriginX;
+          var verticalTravelPx   = nextTouchDownY - this.touchOriginY;
+
+          this.nextBoxCornerLeft = this.currentBoxCornerLeft + horizontalTravelPx;
+          this.nextBoxCornerTop  = this.currentBoxCornerTop + verticalTravelPx;
+
+          this.$.css('left', this.nextBoxCornerLeft);
+          this.$.css('top' , this.nextBoxCornerTop);
         }
       });
       
