@@ -13,8 +13,6 @@
       }
       .drag-patch {
         position         : absolute;
-        top              : 0;
-        left             : 0;
         width            : 149px;
         height           : 149px;
         background-color : #8833A0;
@@ -44,32 +42,47 @@
       });
       
       Wheel.View.subclass('App.Drag.Patch', {
+        init  :function() {
+          this.topPatch  = 0;
+          this.leftPatch = 0;
+          this.$.css('left',this.leftPatch);
+          this.$.css('top',this.topPatch);
+        },
         listen:function() {
           this.$.on('touchstart mousedown', this.triggerDragInit.bind(this));
           this.$.on('dragmove',   this.onDragPatch.bind(this));
           this.$.on('dragend',   this.onDragPatchFinished.bind(this));
         },
         triggerDragInit: function(e) {
-          console.log("draginit");
-          this.starting_mouse_x = e.pageX;
-          this.starting_mouse_y = e.pageX;
+          this.tOx = e.pageX;
+          this.tOy = e.pageY;
           this.$.trigger('draginit'); // enable all succesize events to fire dragmove
         },
           onDragPatch: function(e) {
-          console.log("--- starting mouse --- [ x  followed by y ]");
-          console.log(this.starting_mouse_y);
-          console.log(this.starting_mouse_x);
-          var posx = e.pageX;
-          var posy = e.pageY;
-          console.log("--- page  --- [ x  followed by y ]");
-          console.log(posy);
-          console.log(posx);
-          console.log("-------");
-          this.$.css('left',posx);
-          this.$.css('top',posy);
+          var dTx  = e.pageX;
+          var dTy  = e.pageY;
+          
+          var hT   = dTx - this.tOx;
+          var vT   = dTy - this.tOy;
+        
+          var bOx  = this.leftPatch; 
+          var bOy  = this.topPatch;
+          console.log(dTx+" dTx should be " + (this.tOx+hT));
+          console.log(dTy+" dTy should be " + (this.tOy+vT));
+          console.log(" bDx should be " + ((bOx - this.tOx)+hT));
+          console.log(" bDy should be " + ((bOy - this.tOy)+vT));
+
+          this.leftMovePatch = bOx + hT;
+          this.topMovePatch  = bOy + vT;
+          this.$.css('left', this.leftMovePatch);
+          this.$.css('top' , this.topMovePatch);
+         
+          
         },
         onDragPatchFinished: function(e) {
           console.log('drag end is called automatically on mouseup or touchend');
+          this.leftPatch = this.leftMovePatch;
+          this.topPatch = this.topMovePatch;
         }
       });
       
