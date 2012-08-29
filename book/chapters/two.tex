@@ -1,0 +1,76 @@
+
+% section Supported Events (end)
+\chapter{Exapmles of Wheel.js}
+\begin{center}
+{\small\em To provide examples of Wheel.js}
+\end{center}
+
+\section{Smooth Drag Event Example} % (fold)
+\label{sec:Smooth Drag Event Example}
+
+ Implementing Drag Events in Wheel involves 2 stages.
+
+ The first stage is to know what kind of event you would like to initiate the drag.
+ In my exapmle I am using 'mousedown' and 'touchstart' - this gives the effect of 'click-and-hold'
+ for drag on desktop and the effect of touch-and-hold on touch devices.
+
+ The second stage is to know that wheel understands 3 events related to drag.
+ \begin{description}
+   \item[draginit] It is recommended to trigger this event in the initating 
+                   event of the 1st stage.
+   \item[dragmove] Once draginit has been triggered - dragmove events 
+                   will be generated on movement.
+   \item[dragend]  This is automatically called when Wheel detects the 
+                   opposite of your initate drag event - in the case of our example
+                   it will be 'mouseup' and 'touchend'.
+ \end{description}
+
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\lstset{language=Java,
+basicstyle=\ttfamily,
+keywordstyle=\color{javapurple}\bfseries,
+stringstyle=\color{javared},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=2,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+showstringspaces=false}
+ 
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+
+\lstset{
+basicstyle=\ttfamily,
+keywordstyle=\color{javapurple}\bfseries,
+stringstyle=\color{javared},
+commentstyle=\color{javagreen},
+morecomment=[s][\color{javadocblue}]{/**}{*/},
+numbers=left,
+numberstyle=\tiny\color{black},
+stepnumber=2,
+numbersep=10pt,
+tabsize=4,
+showspaces=false,
+breaklines=true,
+showstringspaces=false}
+
+ \lstinputlisting{../examples/7-event-area-app.html}
+ 
+ 
+\begin{figure}[H] % the H is what makes it do a strong 'here' - float is is used for 'H'
+\begin{center}
+\includegraphics[height=1\textwidth]{figures/drag-event-example-1.mps}
+\end{center}
+  \caption{Implementing Smooth Drag in Wheel.js}
+\end{figure}
+% section Smooth Drag Event Example (end)

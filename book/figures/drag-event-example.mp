@@ -3,7 +3,7 @@ beginfig(1);
 
 %% COLORS
 color babyblue;
-babyblue := (3/5,4/5,1);
+babyblue := (3/5,4/5,1); % r, g, b decimal value between 0..1 
 color mandrin;
 mandrin := (1,4/5,3/5);
 %% END COLORS

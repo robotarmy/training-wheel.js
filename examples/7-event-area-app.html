@@ -4,7 +4,11 @@
     <!-- give myself a consistant element style model to work with -->
     <link rel="stylesheet" href="reset.css">
     <!-- mobile friendly : single page app - no zooming - device sensitive -->
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="viewport" 
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   minimum-scale=1.0">
     <title> Event Generating </title>
     <style>
       body {
@@ -27,7 +31,8 @@
     <div id="main">
     </div>
 
-    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
+    <script type="text/javascript" 
+      src="wheel-modern-standalone-0.3.1.js"></script> 
 
     <script class='template' type="text/html" name='App.EventArea'>
       <div class="event-area">
@@ -63,11 +68,17 @@
           'tapend'
           ];
           for(var i = events.length-1; i >= 0; i--) {
-            this.$.on(events[i],'.event-area',this.eventFired.bind(this));
+            this.$.on(events[i]     ,
+                      '.event-area' ,
+                      this.eventFired.bind(this));
           }
         },
         eventFired: function(event) {
-         var dom_string = "<div class=\'event "+event.type+"\'>"+event.type+" has fired</div>";
+         var dom_string = "<div class=\'event "+
+                           event.type+
+                           "\'>"+
+                           event.type+
+                           " has fired</div>";
          this.$.filter('.event-display').prepend(dom_string);
         }
       });

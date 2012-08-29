@@ -2,6 +2,28 @@
 %\usepackage{fontspec} %xelatex or lualatex
 \usepackage{graphicx}
 \usepackage{float}
+
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{calc}
+\newlength\captionLeftDimension
+\newlength\captionRightDimension
+\setlength\captionLeftDimension{ \fboxsep+(\fboxrule*3)}
+\setlength\captionRightDimension{-\fboxsep+(\fboxrule*3)}
+\usepackage{listings}
+
+\lstset{frame=single,
+    frameround=fttf,
+    xleftmargin=\captionLeftDimension,
+    rulecolor=\color{gray},
+    xrightmargin=\captionRightDimension}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip+1pt}}
+\captionsetup[lstinputlisting]{format=listing,labelfont=white,textfont=white}
+
+
+
 %http://www.maths.manchester.ac.uk/~kd/latextut/pdfbyex.htm
 %http://www.maths.manchester.ac.uk/~kd/latextut/bookex.pdf
 \parindent 1cm
@@ -63,65 +85,11 @@ a {\tt theindex} environment, as {\tt index.tex}.
 \pagestyle{headings}
 \pagenumbering{arabic}
 
-%\include{ch1}
-%\include{ch2}
+\include{chapters/one}
+\include{chapters/two}
 
 
 
-
-
-\chapter{Step by Step Basics of Wheel.js}
-\begin{center}
-{\small\em To illuminate the concepts of Wheel.js}
-\end{center}
-
-
-\section{What is Wheel.js?} % (fold)
-\label{sec:What is Wheel.js?}
-
-% section What is Wheel.js? (end)
-
-\section{What is an App?} % (fold)
-\label{sec:What is an App?}
-
-% section What is an App? (end)
-
-\section{Creating a View} % (fold)
-\label{sec:Creating a View}
-
-% section Creating a View (end)
-
-\section{What is dollar?} % (fold)
-\label{sec:What is dollar?}
-
-% section What is dollar? (end)
-
-\section{Simple Event Handling} % (fold)
-\label{sec:Simple Event Handling}
-
-% section Simple Event Handling (end)
-
-\section{Supported Events} % (fold)
-\label{sec:Supported Events}
-
-\newpage
-% section Supported Events (end)
-\chapter{Exapmles of Wheel.js}
-\begin{center}
-{\small\em To provide examples of Wheel.js}
-\end{center}
-
-\section{Smooth Drag Event Example} % (fold)
-\label{sec:Smooth Drag Event Example}
-
-\begin{figure}[H] % the H is what makes it do a strong 'here' - float is is used for 'H'
-\begin{center}
-\includegraphics[height=1\textwidth]{figures/drag-event-example-1.mps}
-\end{center}
-  \caption{Implementing Smooth Drag in Wheel.js}
-\end{figure}
-% section Smooth Drag Event Example (end)
-\newpage
 
 \begin{thebibliography}{99}
   \addcontentsline{toc}{chapter}{Bibliography}
