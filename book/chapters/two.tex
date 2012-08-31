@@ -1,6 +1,6 @@
 
 % section Supported Events (end)
-\chapter{Exapmles of Wheel.js}
+\chapter{Examples of Wheel.js}
 \begin{center}
 {\small\em To provide examples of Wheel.js}
 \end{center}
@@ -8,69 +8,106 @@
 \section{Smooth Drag Event Example} % (fold)
 \label{sec:Smooth Drag Event Example}
 
- Implementing Drag Events in Wheel involves 2 stages.
+ Implementing Drag Events in Wheel involves setting up listeners which will
+ fire in 2 stages.
+
+ \lstinputlisting[firstnumber=60,firstline=60,lastline=73]{../examples/6-patch-drag-app.html}
 
  The first stage is to know what kind of event you would like to initiate the drag.
- In my exapmle I am using 'mousedown' and 'touchstart' - this gives the effect of 'click-and-hold'
- for drag on desktop and the effect of touch-and-hold on touch devices.
 
- The second stage is to know that wheel understands 3 events related to drag.
- \begin{description}
-   \item[draginit] It is recommended to trigger this event in the initating 
-                   event of the 1st stage.
-   \item[dragmove] Once draginit has been triggered - dragmove events 
-                   will be generated on movement.
-   \item[dragend]  This is automatically called when Wheel detects the 
-                   opposite of your initate drag event - in the case of our example
-                   it will be 'mouseup' and 'touchend'.
- \end{description}
+ In my example I have chosen \emph{tapstart} (which is both 'mousedown' and 'touchstart') 
+ this gives the effect of 'click-and-hold' for drag on desktop and
+ the effect of 'touch-and-hold' on touch devices.
 
-\definecolor{javared}{rgb}{0.6,0,0} % for strings
-\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
-\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
-\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+ The second stage is to know that wheel understands 4 events related to drag.
 
-\lstset{language=Java,
-basicstyle=\ttfamily,
-keywordstyle=\color{javapurple}\bfseries,
-stringstyle=\color{javared},
-commentstyle=\color{javagreen},
-morecomment=[s][\color{javadocblue}]{/**}{*/},
-numbers=left,
-numberstyle=\tiny\color{black},
-stepnumber=2,
-numbersep=10pt,
-tabsize=4,
-showspaces=false,
-showstringspaces=false}
- 
-\definecolor{javared}{rgb}{0.6,0,0} % for strings
-\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
-\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
-\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+ \begin{itemize}
+   \item[draginit]
+     \begin{enumerate}
+       \item This is an event that is triggered in the callback event of
+                   and initiating event. The callback snippet below demonstrates 
+                   using the \emph{\$} dom-property to invoke the \emph{draginit} event.
+                  \lstinputlisting[firstnumber=75,firstline=75,lastline=78]{../examples/6-patch-drag-app.html}
+     \end{enumerate}
+   \item[dragstart] 
+ \begin{enumerate}
+   \item Once \emph{draginit} has been triggered - 
+                    \emph{dragstart} will be called by the Wheel framework.
+   \lstinputlisting[firstnumber=80,firstline=80,lastline=83]{../examples/6-patch-drag-app.html}
+ \end{enumerate}
+   \item[dragmove] 
+     \begin{enumerate}
+       \item The Wheel framework will generate \emph{dragmove} events on movement of the still-touching
+                   finger - or the still held down mouse. The position of the finger
+                   or mouse respectively is encoded in 'pageX' and 'pageY'.
+   \lstinputlisting[firstnumber=85,firstline=85,lastline=87]{../examples/6-patch-drag-app.html}
+     \end{enumerate}
+   \item[dragend]
+    \begin{enumerate}
+      \item This is triggered when Wheel detects the 
+                   opposite of your initiate drag event. In this case it will be 
+                   \emph{touchstop}
+    \lstinputlisting[firstnumber=89,firstline=89,lastline=92]{../examples/6-patch-drag-app.html}
 
-\lstset{
-basicstyle=\ttfamily,
-keywordstyle=\color{javapurple}\bfseries,
-stringstyle=\color{javared},
-commentstyle=\color{javagreen},
-morecomment=[s][\color{javadocblue}]{/**}{*/},
-numbers=left,
-numberstyle=\tiny\color{black},
-stepnumber=2,
-numbersep=10pt,
-tabsize=4,
-showspaces=false,
-breaklines=true,
-showstringspaces=false}
+    \end{enumerate}
+\end{itemize}
 
- \lstinputlisting{../examples/7-event-area-app.html}
- 
- 
+
+ I am going to explain \emph{dragstart}, \emph{dragmove} and \emph{dragend} in terms of STARTING, DYNAMIC, and FINAL states
+ and how they can be used to implement a smooth drag algorithm.
+ To ease explaining
+ I will refer the the mobile interaction with the touching finger - on a mobile device the finger shares most
+ properties of a desktop mouse being moved with a left-click held. 
+
+ In the below diagram I have detailed these 3 'states' - STARTING, DYNAMIC, and FINAL -- I will explain
+ them following the diagram.
+
 \begin{figure}[H] % the H is what makes it do a strong 'here' - float is is used for 'H'
 \begin{center}
 \includegraphics[height=1\textwidth]{figures/drag-event-example-1.mps}
 \end{center}
   \caption{Implementing Smooth Drag in Wheel.js}
 \end{figure}
+
+ \begin{description}
+   \item[STARTING] state is used to record the initial touch origin of the finger press. These inital values
+     are used as the basis for calculating 'horizontal travel' and 'vertical travel'. In wheel this state is
+     realized by using \emph{dragstart}
+     
+   \lstinputlisting[firstnumber=80,firstline=80,lastline=83]{../examples/6-patch-drag-app.html}
+   \item[DYNAMIC] state is when the finger is held on the screen and moved around. 
+     In wheel this state is realized by using \emph{dragmove}
+
+     Wheel normalizes what would generally be clientX/clientY or pageX/pageY in various browsers into pageX/pageY. 
+   \lstinputlisting[firstnumber=85,firstline=85,lastline=87]{../examples/6-patch-drag-app.html}
+   \textbf{Wheel also has the faculty to provide deltaX and deltaY properties as part of an event}.
+      Converting this
+     code to use this simplifying faculty of Wheel is left as an excersize to the reader.
+     
+     For the purposes of this example we are calculating deltaX and deltaY manually to expose
+     the relationships that can be utilized by harnessing \emph{dragstart}, \emph{dragmove} and \emph{dragend}
+     together. I refer to deltaX as horizontalTravel and deltaY as verticalTravel in the example.
+     
+     This function details the process of calculating horizontalTravel and verticalTravel from the value of pageX
+     and pageY. The horizontal travel and the vertical travel are relative to the touch position recorded in \emph{dragstart}.
+   \lstinputlisting[firstnumber=94,firstline=94,lastline=97]{../examples/6-patch-drag-app.html}
+     The current postion of the box that the finger is moving is based on the value that is stored in the View object.
+     The initial values are 0 and 0 for x and y respectively. This current position becomes the next position by including
+     the values of horizontal travel and vertical travel to x and y respectively.
+   \lstinputlisting[firstnumber=98,firstline=98,lastline=100]{../examples/6-patch-drag-app.html}
+     The \$ operator is used to alter the css style attribute with this next value for top and left. This creates the
+     illusion that the box is moving with the finger.
+   \lstinputlisting[firstnumber=101,firstline=101,lastline=103]{../examples/6-patch-drag-app.html}
+   \item[FINAL] state is when the finger is released. In wheel this state is realized by using \emph{dragend}.
+     The values from the previous state dynamic will be commited to the object as the current position of the box that
+     the view represents. Because the dom has already been updated in the DYNAMIC state - what you see is what the
+     object knows as-well.
+    \lstinputlisting[firstnumber=89,firstline=89,lastline=92]{../examples/6-patch-drag-app.html}
+
+ \end{description}
+
+ \newpage
+ The complete code listings for this example is as follows :
+ \lstinputlisting{../examples/6-patch-drag-app.html}
 % section Smooth Drag Event Example (end)
+

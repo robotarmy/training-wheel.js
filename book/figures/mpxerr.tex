@@ -1,0 +1,29 @@
+\gdef\mpxshipout{\shipout\hbox\bgroup
+  \setbox0=\hbox\bgroup}
+\gdef\stopmpxshipout{\egroup  \dimen0=\ht0 \advance\dimen0\dp0
+  \dimen1=\ht0 \dimen2=\dp0
+  \setbox0=\hbox\bgroup
+    \box0
+    \ifnum\dimen0>0 \vrule width1sp height\dimen1 depth\dimen2 
+    \else \vrule width1sp height1sp depth0sp\relax
+    \fi\egroup
+  \ht0=0pt \dp0=0pt \box0 \egroup}
+\mpxshipout% line 18 ./drag-event-example.mp
+\tt starting state%
+\stopmpxshipout
+\mpxshipout% line 23 ./drag-event-example.mp
+\tt final state%
+\stopmpxshipout
+\mpxshipout% line 27 ./drag-event-example.mp
+\tt \magnification=10 dynamic state%
+\stopmpxshipout
+\mpxshipout% line 55 ./drag-event-example.mp
+vertical travel%
+\stopmpxshipout
+\mpxshipout% line 63 ./drag-event-example.mp
+horizontal travel%
+\stopmpxshipout
+\mpxshipout% line 100 ./drag-event-example.mp
+Actual travel%
+\stopmpxshipout
+\end{document}

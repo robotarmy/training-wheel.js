@@ -1,5 +1,5 @@
-\documentclass[16pt]{book}
-%\usepackage{fontspec} %xelatex or lualatex
+\documentclass[14pt]{book}
+\usepackage{fontspec} %xelatex or lualatex
 \usepackage{graphicx}
 \usepackage{float}
 
@@ -11,6 +11,42 @@
 \setlength\captionLeftDimension{ \fboxsep+(\fboxrule*3)}
 \setlength\captionRightDimension{-\fboxsep+(\fboxrule*3)}
 \usepackage{listings}
+
+\definecolor{lightgray}{rgb}{.929,.929,.929}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+%http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
 
 \lstset{frame=single,
     frameround=fttf,
@@ -39,11 +75,16 @@
 %\renewcommand\section{\newpage\stdsection}
 
 %\makeindex -- how to use this?
+% Note the tag used to make an index entry. You may need to consult Lamport's
+% book~\cite{lamport} for details of the procedure to make the index input
+% file; \LaTeX \ will create a pre-index by listing all the tagged
+% items in the file {\tt bookex.idx} then you edit this into
+% a {\tt theindex} environment, as {\tt index.tex}.
 
 
 \title{Wheel.js By Example  }
 
-\author{Kane _ _ \& Curtis J. Schofield \\
+\author{Curtis J. Schofield \\
 {\small\em \copyright \  Draft date \today }}
 
 \begin{document}
@@ -56,28 +97,10 @@
 \chapter*{Preface}\normalsize
   \addcontentsline{toc}{chapter}{Preface}
 \pagestyle{plain}
-The book root file {\tt bookex.tex} gives a basic example of how to
-use \LaTeX \ for preparation of a book. Note that all
-\LaTeX \ commands begin with a
-backslash.
-
-Each
-Chapter, Appendix and the Index is made as a {\tt *.tex} file and is
-called in by the {\tt include} command---thus {\tt ch1.tex} is
-the name here of the file containing Chapter~1. The inclusion of any
-particular file can be suppressed by prefixing the line by a
-percent sign.
-
-
- Do not put an {\tt end{document}} command at the end of chapter files;
-just one such command is needed at the end of the book.
-
-Note the tag used to make an index entry. You may need to consult Lamport's
-book~\cite{lamport} for details of the procedure to make the index input
-file; \LaTeX \ will create a pre-index by listing all the tagged
-items in the file {\tt bookex.idx} then you edit this into
-a {\tt theindex} environment, as {\tt index.tex}.
-
+This book provides a way to learn {\tt Wheel.js} by exploring it's
+contepts and providing examples of common {\tt Wheel.js } patterns
+and implementation of common interface interaction patters with {\tt
+Wheel.js }.
 
 
 
