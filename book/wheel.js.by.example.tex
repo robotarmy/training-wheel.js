@@ -1,4 +1,4 @@
-\documentclass[14pt]{book}
+\documentclass{book}
 \usepackage{fontspec} %xelatex or lualatex
 \usepackage{graphicx}
 \usepackage{float}
@@ -82,16 +82,19 @@
 % a {\tt theindex} environment, as {\tt index.tex}.
 
 
-\title{Wheel.js By Example  }
+\title{Wheel.js By Example  
+\thanks{Contribution from our BlazingCloud.net}
+\thanks{Contribution from our Kane Baccigalupi}}
 
-\author{Curtis J. Schofield \\
-{\small\em \copyright \  Draft date \today }}
+\author{Curtis J. Schofield \\ \\
+  {\small\em \copyright \ Curtis J. Schofield \& BlazingCloud.net } \\ 
+  {\small\em Draft date \today }}
 
 \begin{document}
-% \maketitle -- how to use this?
- \addcontentsline{toc}{chapter}{Contents}
-\pagenumbering{arabic}
-\tableofcontents
+ \maketitle %-- how to use this?
+ %\addcontentsline{toc}{chapter}{Contents}
+ \pagenumbering{arabic}
+ %\tableofcontents
 %\listoffigures
 %\listoftables
 \chapter*{Preface}\normalsize
