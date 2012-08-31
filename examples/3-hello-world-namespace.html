@@ -12,27 +12,23 @@
     <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
     <script class='template' type="text/html" name='App.Hello.World'>
-      <div> 
-      </div>
+      <div>{{message}}</div>
     </script>
 
     <script type="text/javascript">
       Wheel.App.subclass('App', {
         init: function() {
-          App.Hello.World.build({parent:$('#main')});
+          App.Hello.World.build({parent:$('#main'),message:'Hello.World.Namespace'});
         }
       });
       
-      Wheel.View.subclass('App.Hello.World', {
-        // constructor
-        init:function() {
-          // $ jquery object
-          this.$.html("Hello World!");
-        }
-      });
-      
-      App.build();
+      Wheel.View.subclass('App.Hello.World', {});
+// this comes when using namespacing!
 
+// App.Hello.World.App === App
+// can have multiple apps!
+      var myHello = App.build();
+      // App.app === myHello
      </script>
   </body>
 </html>

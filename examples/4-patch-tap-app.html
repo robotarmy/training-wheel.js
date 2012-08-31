@@ -54,7 +54,13 @@
           var alpha = Math.random();
           var rgbaColor = "rgba(" +red+ "," + green + "," +blue+ "," +alpha+ ")"
           this.$.css('background-color', rgbaColor);
+          /* extract a seperate example - re-rendering templates
+          this.$.off();
+          this.$ = this.renderTemplate();
+          this.listen();
+          */
         }
+         
       });
 
       App.build();

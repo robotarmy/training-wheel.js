@@ -13,25 +13,18 @@
     <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
     <script class='template' type="text/html" name='HelloWorld'>
-      <div> 
-      </div>
+      <div>{{message}}</div>
     </script>
 
     <script type="text/javascript">
       Wheel.App.subclass('App', {
         init: function() {
-          HelloWorld.build({parent:$('#main')});
+          HelloWorld.build({parent:$('#main'), message: 'Hello World!'});
         }
       });
-      
-      Wheel.View.subclass('HelloWorld', {
-        // constructor
-        init:function() {
-          // $ jquery object
-          this.$.html("Hello World!");
-        }
-      });
-      
+
+      Wheel.View.subclass('HelloWorld');
+
       App.build();
 
      </script>

@@ -18,18 +18,10 @@
     <script type="text/javascript">
       Wheel.App.subclass('MyHelloWorldApp', {
         init: function() {
-          HelloWorld.build({parent:$('#main')});
-        }
-      });
-      
-      Wheel.View.subclass('HelloWorld', {
-        // constructor
-        init:function() {
-          // $ jquery object
           this.$.html("Hello World!");
         }
       });
-      
+      // inception point 
       MyHelloWorldApp.build();
 
      </script>

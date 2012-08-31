@@ -3,7 +3,11 @@
     <!-- give myself a consistant element style model to work with -->
     <link rel="stylesheet" href="reset.css">
     <!-- mobile friendly : single page app - no zooming - device sensitive -->
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta name="viewport" 
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   minimum-scale=1.0">
 
     <title> Smooth Drag Patch </title>
     <style>
@@ -27,9 +31,13 @@
     <div id="main">
     </div>
 
-    <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
+    <script type="text/javascript"
+            src="wheel-modern-standalone-0.3.1.js">
+    </script> 
 
-    <script class='template' type="text/html" name='App.Drag.Patch'>
+    <script class='template' 
+            type="text/html" 
+            name='App.Drag.Patch'>
       <div class='drag-patch'> 
       </div>
     </script>
@@ -45,27 +53,44 @@
         init  :function() {
           this.currentBoxCornerTop  = 0;
           this.currentBoxCornerLeft = 0;
-          this.$.css('left',this.currentBoxCornerLeft);
-          this.$.css('top',this.currentBoxCornerTop);
+          this.$.css('left', this.currentBoxCornerLeft);
+          this.$.css('top', this.currentBoxCornerTop);
         },
+
         listen:function() {
-          this.$.on('touchstart mousedown', this.triggerDragInit.bind(this));
-          this.$.on('dragmove',  this.onDragPatch.bind(this));
-          this.$.on('dragend',   this.onDragPatchFinished.bind(this));
+
+          this.$.on('tapstart' ,
+                    this.triggerDragInit.bind(this));
+
+          this.$.on('dragstart' ,
+                    this.onDragStart.bind(this));
+
+          this.$.on('dragmove' ,
+                    this.onDragMove.bind(this));
+
+          this.$.on('dragend' ,
+                    this.onDragFinished.bind(this));
         },
+
         triggerDragInit: function(e) {
+          // enable successive dragmove events on motion
+          this.$.trigger('draginit'); 
+        },
+
+        onDragStart: function(e) {
           this.touchOriginX = e.pageX;
           this.touchOriginY = e.pageY;
-          this.$.trigger('draginit'); // enable all succesize events to fire dragmove
         },
-        onDragPatch: function(e) {
-          this.assignNextBoxTravel(e.pageX,e.pageY);
+
+        onDragMove: function(e) {
+          this.assignNextBoxTravel(e.pageX, e.pageY);
         },
-        onDragPatchFinished: function(e) {
-          console.log('drag end is called automatically on mouseup or touchend');
+
+        onDragFinished: function(e) {
           this.currentBoxCornerLeft = this.nextBoxCornerLeft;
           this.currentBoxCornerTop = this.nextBoxCornerTop;
         },
+
         assignNextBoxTravel:function(nextTouchDownX,nextTouchDownY) {
           var horizontalTravelPx = nextTouchDownX - this.touchOriginX;
           var verticalTravelPx   = nextTouchDownY - this.touchOriginY;
