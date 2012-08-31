@@ -10,15 +10,10 @@
     </div>
     <script type="text/javascript" src="wheel-modern-standalone-0.3.1.js"></script> 
 
-    <script class='template' type="text/html" name='HelloWorld'>
-      <div> 
-      </div>
-    </script>
-
     <script type="text/javascript">
       Wheel.App.subclass('MyHelloWorldApp', {
         init: function() {
-          this.$.html("Hello World!");
+            alert('App Initialized');
         }
       });
       // inception point 
