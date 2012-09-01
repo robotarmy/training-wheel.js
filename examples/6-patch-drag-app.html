@@ -59,12 +59,12 @@
 
         listen:function() {
 
-          this.$.on('tapstart' ,
+          this.$.on('touchstart mousedown' ,
                     this.triggerDragInit.bind(this));
-
+          /*
           this.$.on('dragstart' ,
-                    this.onDragStart.bind(this));
-
+                   this.onDragStart.bind(this));
+          */
           this.$.on('dragmove' ,
                     this.onDragMove.bind(this));
 
@@ -73,6 +73,8 @@
         },
 
         triggerDragInit: function(e) {
+          this.touchOriginX = e.pageX;
+          this.touchOriginY = e.pageY;
           // enable successive dragmove events on motion
           this.$.trigger('draginit'); 
         },
