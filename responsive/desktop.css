@@ -1,0 +1,39 @@
+body {
+  width:1024px;
+  height:768px;
+  margin: 0 auto;
+}
+
+body .example-area, body .source-area {
+  display:block;
+}
+
+body .nav {
+  float:left;
+  width:320px;
+  background-color:inherit;
+}
+
+body .example-area {
+  width:320px;
+  height:inherit;
+
+  float:left;
+
+}
+body .source-area {
+  width:320px;
+  height:inherit;
+  padding-left: 1em;
+  float:left;
+
+}
+.iphone {
+width:320px;
+height:480px;
+}
+.column .title  {
+  padding-top:1em;
+  padding-left:1em;
+}
+

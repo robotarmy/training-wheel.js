@@ -7,96 +7,73 @@
   <meta charset="utf-8">
 
   <title>Wheel HTML5 Worksheet</title>
-  <style>
-    body {
-        width:320px;
-        background-color:rgb(119 ,228,255);
-        color: rgb(18,18,18);
-        font-family: sans-serif;
-        font-weight: 200;
-      }
-      ol {
-        margin:0;
-        padding:0;
-        width:300px;
-      }
-      li {
-        list-style-type:none;
-      }
-      li {
-        background-color: rgb(238,0,68);
-        border-radius: 10px; 
-        -moz-border-radius: 10px; 
-        -webkit-border-radius: 10px; 
-        margin-bottom:0.5em;
-        margin-left:10px;;
-        margin-right:10px;;
-        padding-top:11px;
-        padding-bottom:11px;
-        padding-left:11px;
-
-      }
-      li a {
-        color:rgb(235,241,241);
-        font-size:1.2em;
-      }
-
-  </style>
   <meta name="description" content="HTML5 worksheet Wheel.js">
   <meta name="author" content="Curtis Schofield / ram9.cc">
   <!-- mobile friendly : single page app - no zooming - device sensitive -->
   <meta name="viewport" content=
   "width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
   <!-- give myself a consistant element style model to work with -->
-  <link rel="stylesheet" href="example/reset.css">
-  <!-- scripts at bottom -->
+  <link rel="stylesheet" href="examples/reset.css">
+  <link rel="stylesheet" href="responsive/default.css">
+  <script type="text/javascript" charset="utf-8" src='lib/modernize.js'>
+  </script>
+  <script type="text/javascript" charset="utf-8">
+   Modernizr.load([{
+     test: Modernizr.mq("only screen and (min-width: 800px)"),
+     yep : ['lib/zepto.js',
+            'cm/codemirror.js',
+            'cm/codemirror.css',
+            'cm/util/runmode.js',
+            'responsive/desktop.js',
+            'responsive/desktop.css']
+     }]);
+  </script>
+  <!-- application scripts at bottom -->
 </head>
 
 <body>
   <h1>Wheel.js</h1>
 
-  <div class='main'>
-    <h3>Step By Step Rudimentary Wheel.js Application Demos</h3>
-
-    <h4>wheel.js concepts by example</h4>
+  <div class='nav'>
+    <h4>Step By Step Rudimentary Wheel.js Application Demos</h4>
 
     <ol>
       <li>
-        <a href='examples/1-first-app.html'>My First App</a>
+        <a class='demo' href='examples/1-first-app.html'>My First App</a>
       </li>
 
       <li>
-        <a href='examples/2-hello-world-view.html'>My Hellow
+        <a class='demo' href='examples/2-hello-world-view.html'>My Hellow
         World App and View</a>
       </li>
 
       <li>
-        <a href='examples/3-hello-world-namespace.html'>My First
+        <a class='demo' href='examples/3-hello-world-namespace.html'>My First
         Namespaced App with View</a>
       </li>
 
       <li>
-        <a href='examples/4-patch-tap-app.html'>Tap a Patch
+        <a class='demo' href='examples/4-patch-tap-app.html'>Tap a Patch
         App</a>
       </li>
 
       <li>
-        <a href='examples/5-patch-swipe-app.html'>Swipe a Patch
+        <a class='demo' href='examples/5-patch-swipe-app.html'>Swipe a Patch
         App</a>
       </li>
 
       <li>
-        <a href='examples/6-patch-drag-app.html'>Drag Patch
+        <a class='demo' href='examples/6-patch-drag-app.html'>Drag Patch
         App</a>
       </li>
 
       <li>
-        <a href='examples/7-event-area-app.html'>Event Area
+        <a class='demo' href='examples/7-event-area-app.html'>Event Area
         App</a>
       </li>
     </ol>
 
-    <h3>Read the Book</h3>
+    <h4>Read the Book</h3>
 
     <ol>
       <li>
@@ -105,7 +82,7 @@
       </li>
     </ol>
 
-    <h3>Download your wheel.js</h3>
+    <h4>Download your wheel.js</h3>
 
     <ol>
       <li>
@@ -114,6 +91,22 @@
         0.3.1 (standalone)</a>
       </li>
     </ol>
+  </div>
+  <div class='column example-area'>
+    <h4 class='title'>
+      Demo 
+    </h4>
+    <iframe id='example-demo' class='iphone'  type='text/html'>
+    </iframe>
+  </div>
+  <div class='column source-area'>
+    <h4 class='title'>
+      Source code 
+    </h4>
+    <pre class='iphone' id='source-code'>
+    </pre>
+  </div>
+  <div class='clear'>
   </div>
 </body>
 </html>
